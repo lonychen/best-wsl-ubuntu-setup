@@ -349,6 +349,7 @@ sudo bash -c "
   curl -sL https://github.com/sigoden/aichat/releases/download/${AIChatVersion}/aichat-${AIChatVersion}-x86_64-unknown-linux-musl.tar.gz \
     | tar -xzO aichat > /usr/local/bin/aichat && chmod +x /usr/local/bin/aichat
 "
+aichat -V
 ```
 
 設定使用 Gemini 來讓 [AIChat](https://github.com/sigoden/aichat) 回答問題，你可以從 <https://ai.dev/app/apikey> 取得免費金鑰：
@@ -365,6 +366,13 @@ EOF
 ```
 
 > 💡 完整設定可以參見 <https://github.com/sigoden/aichat/wiki/Environment-Variables>
+
+第一次用 [AIChat](https://github.com/sigoden/aichat) 要先更新模型清單：
+
+```sh
+aichat --sync-models
+```
+
 
 ### 安裝 Google Cloud SDK
 
