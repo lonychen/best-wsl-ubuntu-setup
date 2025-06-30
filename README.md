@@ -337,6 +337,35 @@ ghcs -h
 ghce -h
 ```
 
+### 安裝 [AIChat](https://github.com/sigoden/aichat) 工具
+
+[AIChat: All-in-one LLM CLI Tool](https://github.com/sigoden/aichat) 是一個多合一的 LLM CLI 工具，具有 Shell 助理、CMD & REPL 模式、RAG、AI 工具與代理等功能，讓你再也不必記憶指令。
+
+以下這個命令會將 `aichat` 最新版下載並解壓縮到 `/usr/local/bin/aichat` 路徑下：
+
+```sh
+AIChatVersion=$(curl -s "https://api.github.com/repos/sigoden/aichat/releases/latest" | jq -r .tag_name)
+sudo bash -c "
+  curl -sL https://github.com/sigoden/aichat/releases/download/${AIChatVersion}/aichat-${AIChatVersion}-x86_64-unknown-linux-musl.tar.gz \
+    | tar -xzO aichat > /usr/local/bin/aichat && chmod +x /usr/local/bin/aichat
+"
+```
+
+設定使用 Gemini 來讓 [AIChat](https://github.com/sigoden/aichat) 回答問題，你可以從 <https://ai.dev/app/apikey> 取得免費金鑰：
+
+```sh
+cat <<'EOF' | tee -a ~/.profile
+export GEMINI_API_KEY='YOUR_GEMINI_API_KEY'
+export AICHAT_PLATFORM=gemini
+# 追求高品質回應，可用 gemini-2.5-pro 模型
+#expor AICHAT_MODEL=gemini:gemini-2.5-pro
+# 追求高效率回應，可用 gemini-2.5-flash-lite-preview-06-17 模型
+export AICHAT_MODEL=gemini:gemini-2.5-flash-lite-preview-06-17
+EOF
+```
+
+> 💡 完整設定可以參見 <https://github.com/sigoden/aichat/wiki/Environment-Variables>
+
 ### 安裝 Google Cloud SDK
 
 ```sh
