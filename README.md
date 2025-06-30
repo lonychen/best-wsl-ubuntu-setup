@@ -168,7 +168,7 @@ EOF
 # bash setup
 cat <<'EOF' | tee -a ~/.bashrc
 # Enable programmable completion features
-shopt -u progcomp
+shopt -u direxpand
 shopt -s no_empty_cmd_completion
 EOF
 
@@ -234,6 +234,12 @@ git config --global init.defaultBranch main
 ```
 
 > 💡 這個 [@willh/git-setup](https://www.npmjs.com/package/@willh/git-setup) 是我多年前開發的小工具，換新電腦的時候很實用，支援跨平臺自動設定 Git 常見參數。
+
+如果您打算使用 Azure Repos 或 Azure DevOps，則需要進行一些額外的設定，以下命令可以讓你在 WSL 直接跟 Windows 共用同一個 [Git Credential Manager (GCM)](https://github.com/GitCredentialManager/git-credential-manager)：
+
+```sh
+git config --global credential.https://dev.azure.com.useHttpPath true
+```
 
 ### 設定 Node.js 環境
 
@@ -338,8 +344,75 @@ source  ~/.bashrc
 gcloud init
 ```
 
+### 搞定網路問題
+
+若要從 WSL 直接連接 Windows 主機的網路，有兩種方法：
+
+1. **Windows 10** 的 WSL 2 僅支援 NAT 網路
+
+    因為 WSL 是透過與 Windows 共用網路的方式，所以預設網路閘道是走虛擬網卡的 IP 地址，而每次 Windows 重新開機時，這個網址都會改變。所以取得 IP 的方法有點麻煩，有以下 3 種，都有點小麻煩，前兩個要記比較長的命令，最後一個雖然有域名，但也不是非常直覺：
+
+    透過 `ip route show default` 取得預設閘道的網路資訊，再透過 `awk` 擷取 IP 部分：
+
+    ```sh
+    ip route show default | awk '{print $3}'
+    ```
+
+    透過 `/etc/resolv.conf` 記錄的 DNS IP 位址，預設就是與 Windows 共用的那個網路介面，再透過 `awk` 擷取 IP 部分：
+
+    ```sh
+    grep -m1 nameserver /etc/resolv.conf | awk '{print $2}'
+    ```
+
+    WSL 安裝時會自動為 Windows 建立 `<電腦名稱>.local` 的 mDNS 條目(Multicast DNS)，可直接透過 mDNS 連線，但有些人不太會記得自己的電腦名稱：
+
+    ```sh
+    echo $(hostname).local
+    ```
+
+    所以我的解法是，登入時自動建立一個 `$local` 變數，日後透過該變數就可以快速取得 Windows 的 IP 地址：
+
+    ```sh
+    export local=$(ip route show default | awk '{print $3}')
+    ```
+
+    將該設定寫入到 `~/.bashrc` 檔案中，之後每次登入就不用煩惱了，但你要記得有個 `$local` 變數可以用：
+
+    ```sh
+    cat <<'EOF' | tee -a ~/.bashrc
+    export local=$(ip route show default | awk '{print $3}')
+    EOF
+    ```
+
+2. **Windows 11 22H2+** 的 WSL2 可啟用 Mirrored Networking 設定
+
+    Microsoft 在 Windows 11 22H2 引入 Mirrored networking，WSL2 會「鏡像」所有 Windows 介面，讓你在 WSL 2 中直接用 `localhost` 就可以連接 Windows 網路，等於是完全共用網路空間！
+
+    請在 Windows 建立或編輯 `%USERPROFILE%\.wslconfig` 檔案，加入以下設定：
+
+    ```ini
+    [wsl2]
+    networkingMode=mirrored
+    ```
+
+    接著登出 WSL 2 並在 Windows 執行 `wsl --shutdown` 將 WSL 2 完整關閉，下次登入 WSL 就會啟用鏡像網路了！
+
+    這個設定的好處就是可以完美支援 IPv6，未來也不需再查 IP 地址，而且與多數 VPN 或 Multicast 的相容性都有大幅提升！👍
+
 ### 其他手動安裝的注意事項
 
 1. 安裝 Docker Engine for Linux
 
     可以參考 [如何移除 Docker Desktop 並在 Windows 與 WSL 2 改安裝 Docker Engine](https://blog.miniasp.com/post/2025/06/14/How-to-remove-Docker-Desktop-and-install-Docker-Engine-on-Windows-with-WSL-2)
+
+## 相關連結
+
+- The Will Will Web (保哥的部落格)
+  - [使用 WSL 2 打造優質的多重 Linux 開發環境](https://blog.miniasp.com/post/2020/07/26/Multiple-Linux-Dev-Environment-build-on-WSL-2)
+  - [關於 Linux 下 Bash 與 Zsh 啟動檔的載入順序研究](https://blog.miniasp.com/post/2021/07/26/Bash-and-Zsh-Initialization-Files)
+- Microsoft Learn
+  - [Advanced settings configuration in WSL](https://learn.microsoft.com/en-us/windows/wsl/wsl-config?WT.mc_id=DT-MVP-4015686)
+  - [Accessing network applications with WSL](https://learn.microsoft.com/en-us/windows/wsl/networking?WT.mc_id=DT-MVP-4015686)
+  - [Use systemd to manage Linux services with WSL](https://learn.microsoft.com/en-us/windows/wsl/systemd?WT.mc_id=DT-MVP-4015686)
+  - [Working across Windows and Linux file systems](https://learn.microsoft.com/en-us/windows/wsl/filesystems?WT.mc_id=DT-MVP-4015686)
+  - [File Permissions for WSL](https://learn.microsoft.com/en-us/windows/wsl/file-permissions?WT.mc_id=DT-MVP-4015686)
