@@ -156,6 +156,19 @@ echo "david ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/david
 sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 ```
 
+### 設定 Node.js 環境
+
+我會建議用 [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager) 來管理 Node.js 的版本，這樣可以方便地切換不同的 Node.js 版本，真的可以減少很多麻煩事。
+
+```sh
+curl -s -o- https://raw.githubusercontent.com/nvm-sh/nvm/$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | jq -r .tag_name)/install.sh | bash
+source ~/.bashrc
+nvm install 22
+nvm use 22
+nvm alias default 22
+node -v
+```
+
 ### 設定 Bash 環境
 
 ```sh
@@ -223,8 +236,8 @@ source ~/.bashrc
 
 💡 常用快速鍵：
 
-1. 按下 `Ctrl-R` 可以快速搜尋歷史命令。
-2. 按下 `Ctrl-T` 可以快速搜尋檔案
+1. 按下 `Ctrl-R` 可以快速搜尋歷史命令
+2. 按下 `Ctrl-T` 可以快速搜尋檔案 (從當前資料夾開始找起)
 
 ### 設定 Git 環境
 
@@ -241,19 +254,6 @@ git config --global init.defaultBranch main
 
 ```sh
 git config --global credential.https://dev.azure.com.useHttpPath true
-```
-
-### 設定 Node.js 環境
-
-我會建議用 [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager) 來管理 Node.js 的版本，這樣可以方便地切換不同的 Node.js 版本，真的可以減少很多麻煩事。
-
-```sh
-curl -s -o- https://raw.githubusercontent.com/nvm-sh/nvm/$(curl -s "https://api.github.com/repos/nvm-sh/nvm/releases/latest" | jq -r .tag_name)/install.sh | bash
-source ~/.bashrc
-nvm install 22
-nvm use 22
-nvm alias default 22
-node -v
 ```
 
 ### 安裝 [Gemini CLI](https://github.com/google-gemini/gemini-cli/)
