@@ -195,8 +195,7 @@ code .
 sudo apt update && sudo apt install -y net-tools ripgrep jq
 
 # yq: https://github.com/mikefarah/yq
-sudo wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_a
-md64 -O /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
+sudo wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
 ```
 
 ### 設定華麗的 Bash 提示符號
