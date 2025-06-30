@@ -181,6 +181,9 @@ chmod 600 ~/.ssh/authorized_keys
 
 # setup workspace
 mkdir -p ~/projects && cd ~/projects
+
+# setup VS Code
+code .
 ```
 
 ### 安裝常用的工具
@@ -416,3 +419,5 @@ gcloud init
   - [Use systemd to manage Linux services with WSL](https://learn.microsoft.com/en-us/windows/wsl/systemd?WT.mc_id=DT-MVP-4015686)
   - [Working across Windows and Linux file systems](https://learn.microsoft.com/en-us/windows/wsl/filesystems?WT.mc_id=DT-MVP-4015686)
   - [File Permissions for WSL](https://learn.microsoft.com/en-us/windows/wsl/file-permissions?WT.mc_id=DT-MVP-4015686)
+  - [Get started using Git on Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git?WT.mc_id=DT-MVP-4015686)
+  - [Get started using Visual Studio Code with Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode?WT.mc_id=DT-MVP-4015686)
