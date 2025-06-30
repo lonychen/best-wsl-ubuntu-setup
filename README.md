@@ -142,6 +142,13 @@ sudo apt update && sudo apt upgrade -y
 echo "will ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/will
 ```
 
+請記得將上述命令的 `will` 置換成你手冊登入 WSL 時註冊的帳號，如果你的帳號叫 `david` 的話，命令就是：
+
+```sh
+# sudoers
+echo "david ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/david
+```
+
 ### 設定作業系統時區
 
 ```sh
@@ -225,6 +232,8 @@ npx -y @willh/git-setup --name 'Your Name' --email username@gmail.com
 git config --global core.autocrlf input
 git config --global init.defaultBranch main
 ```
+
+> 💡 這個 [@willh/git-setup](https://www.npmjs.com/package/@willh/git-setup) 是我多年前開發的小工具，換新電腦的時候很實用，支援跨平臺自動設定 Git 常見參數。
 
 ### 設定 Node.js 環境
 
