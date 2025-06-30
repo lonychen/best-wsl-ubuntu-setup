@@ -330,10 +330,10 @@ github.com
 ```
 
 ```sh
-# 透過自然語言生成 CLI 指令建議
+# 透過自然語言生成 CLI 指令建議 (ghcs = GitHub Copilot Suggest)
 ghcs -h
 
-# 透過自然語言生成 CLI 指令解釋
+# 透過自然語言生成 CLI 指令解釋 (ghce = GitHub Copilot Explain)
 ghce -h
 ```
 
