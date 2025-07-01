@@ -156,6 +156,18 @@ echo "david ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/david
 sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 ```
 
+### 安裝常用的工具
+
+這些工具可以幫助你更方便地使用 Linux 環境，特別是對於開發者來說，這些工具都是必不可少的。
+
+```sh
+# Installing essential packages...
+sudo apt update && sudo apt install -y net-tools ripgrep jq lftp
+
+# yq: https://github.com/mikefarah/yq
+sudo wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
+```
+
 ### 設定 Node.js 環境
 
 我會建議用 [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager) 來管理 Node.js 的版本，這樣可以方便地切換不同的 Node.js 版本，真的可以減少很多麻煩事。
@@ -197,18 +209,6 @@ mkdir -p ~/projects && cd ~/projects
 
 # setup VS Code
 code .
-```
-
-### 安裝常用的工具
-
-這些工具可以幫助你更方便地使用 Linux 環境，特別是對於開發者來說，這些工具都是必不可少的。
-
-```sh
-# Installing essential packages...
-sudo apt update && sudo apt install -y net-tools ripgrep jq lftp
-
-# yq: https://github.com/mikefarah/yq
-sudo wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
 ```
 
 ### 設定華麗的 Bash 提示符號
