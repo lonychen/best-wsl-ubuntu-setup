@@ -162,7 +162,7 @@ sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ```sh
 # Installing essential packages...
-sudo apt update && sudo apt install -y net-tools ripgrep jq lftp
+sudo apt update && sudo apt install -y net-tools ripgrep jq lftp moreutils
 
 # yq: https://github.com/mikefarah/yq
 sudo wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
