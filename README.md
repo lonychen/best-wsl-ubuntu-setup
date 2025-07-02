@@ -267,6 +267,20 @@ npm install -g @google/gemini-cli && gemini -v
 gemini
 ```
 
+安裝 Gemini CLI 設定精靈
+
+```sh
+sudo touch /usr/local/bin/gemini-init
+sudo chmod 755 /usr/local/bin/gemini-init
+curl -s https://gist.githubusercontent.com/doggy8088/de7f2cfcdecf34e09f2349a8c6867570/raw/76015eaf6e734cb50852bc70958bf4894f0c29d2/gemini-init.sh -o /usr/local/bin/gemini-init
+```
+
+之後在任意資料夾就可以用以下命令快速初始化常用 Gemini CLI 設定：
+
+```sh
+gemini-init
+```
+
 ### 設定 Vim 編輯器
 
 Vim 是一個非常強大的文字編輯器，雖然它的學習曲線有點陡峭，但一旦掌握了，就會發現它的效率非常高。
