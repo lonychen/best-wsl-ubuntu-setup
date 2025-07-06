@@ -162,22 +162,26 @@ sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ```sh
 # Installing essential packages...
-sudo apt update && sudo apt install -y net-tools ripgrep jq lftp moreutils btop wslu
+sudo apt update && sudo apt install -y net-tools ripgrep jq lftp moreutils btop bat wslu
 
 # yq: https://github.com/mikefarah/yq
 sudo wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
+
+mkdir -p ~/.local/bin
+ln -s /usr/bin/batcat ~/.local/bin/bat
 ```
 
 以下列出上述安裝工具的相關連結：
 
-* [net-tools](https://sourceforge.net/projects/net-tools/)：經典的網路診斷與管理工具集
-* [ripgrep](https://github.com/BurntSushi/ripgrep)：超高速的遞迴全文搜尋工具
-* [jq](https://jqlang.org/)：輕量且彈性的命令列 JSON 處理器
-* [lftp](https://lftp.yar.ru/)：支援多種協定的進階檔案傳輸程式
-* [moreutils](https://github.com/pgdr/moreutils)：補齊傳統 UNIX 工具缺口的輔助工具集
-* [btop](https://github.com/aristocratos/btop)：互動式系統資源監控元件
-* [wslu](https://github.com/wslutilities/wslu)：Windows Subsystem for Linux 專用的實用工具集
-* [yq](https://github.com/mikefarah/yq)：可處理 YAML⁄JSON⁄INI⁄XML 的命令列解析器
+- [net-tools](https://sourceforge.net/projects/net-tools/)：經典的網路診斷與管理工具集
+- [ripgrep](https://github.com/BurntSushi/ripgrep)：超高速的遞迴全文搜尋工具
+- [jq](https://jqlang.org/)：輕量且彈性的命令列 JSON 處理器
+- [lftp](https://lftp.yar.ru/)：支援多種協定的進階檔案傳輸程式
+- [moreutils](https://github.com/pgdr/moreutils)：補齊傳統 UNIX 工具缺口的輔助工具集
+- [btop](https://github.com/aristocratos/btop)：互動式系統資源監控元件
+- [wslu](https://github.com/wslutilities/wslu)：Windows Subsystem for Linux 專用的實用工具集
+- [yq](https://github.com/mikefarah/yq)：可處理 YAML⁄JSON⁄INI⁄XML 的命令列解析器
+- [bat](https://github.com/sharkdp/bat)：一個具有語法高亮和 Git 整合的 `cat` 替代命令
 
 ### 設定 Node.js 環境
 
