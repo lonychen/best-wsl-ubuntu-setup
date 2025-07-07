@@ -388,7 +388,7 @@ cat <<'EOF' | tee -a ~/.profile
 export GEMINI_API_KEY='YOUR_GEMINI_API_KEY'
 export AICHAT_PLATFORM=gemini
 # 追求高品質回應，可用 gemini-2.5-pro 模型
-#expor AICHAT_MODEL=gemini:gemini-2.5-pro
+#export AICHAT_MODEL=gemini:gemini-2.5-pro
 # 追求高效率回應，可用 gemini-2.5-flash-lite-preview-06-17 模型
 export AICHAT_MODEL=gemini:gemini-2.5-flash-lite-preview-06-17
 EOF
