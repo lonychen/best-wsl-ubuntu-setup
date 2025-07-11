@@ -296,9 +296,7 @@ gemini
 安裝 Gemini CLI 設定精靈
 
 ```sh
-sudo touch /usr/local/bin/gemini-init
-sudo chmod 755 /usr/local/bin/gemini-init
-curl -s https://gist.githubusercontent.com/doggy8088/de7f2cfcdecf34e09f2349a8c6867570/raw/4533f95aafeaf0b7b6e089c4aafcafa38be6616f/gemini-init.sh -o /usr/local/bin/gemini-init
+sudo curl -sSL https://github.com/doggy8088/gemini-init/raw/main/gemini-init -o /usr/local/bin/gemini-init && sudo chmod +x /usr/local/bin/gemini-init
 ```
 
 之後在任意資料夾就可以用以下命令快速初始化常用 Gemini CLI 設定：
@@ -306,6 +304,8 @@ curl -s https://gist.githubusercontent.com/doggy8088/de7f2cfcdecf34e09f2349a8c68
 ```sh
 gemini-init
 ```
+
+> 此命令會寫入 `.gemini/settings.json` 設定檔。
 
 ### 安裝 [Claude Code](https://www.anthropic.com/claude-code) 程式設計代理人工具
 
