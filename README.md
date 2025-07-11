@@ -296,7 +296,7 @@ gemini
 安裝 Gemini CLI 設定精靈
 
 ```sh
-sudo curl -sSL https://github.com/doggy8088/gemini-init/raw/main/gemini-init -o /usr/local/bin/gemini-init && sudo chmod +x /usr/local/bin/gemini-init
+mkdir -p ~/.local/bin && curl -sSL https://github.com/doggy8088/gemini-init/raw/main/gemini-init -o ~/.local/bin/gemini-init && chmod +x ~/.local/bin/gemini-init
 ```
 
 之後在任意資料夾就可以用以下命令快速初始化常用 Gemini CLI 設定：
