@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e  # 指令出錯就終止腳本
+
+# 1. 如果暫存區目前沒有任何變更，就先把工作區所有異動加入
+if git diff --cached --quiet --exit-code; then
+  git add .
+fi
+
+# 2. 若仍無暫存變更，直接結束避免空 commit
+git diff --cached --quiet --exit-code && {
+  echo "Nothing to commit."
+  exit 0
+}
+
+# 3. 把暫存區 diff 丟給 aichat 產生繁中 commit 訊息並完成提交
+git --no-pager diff --cached \
+  | aichat -e 'analyze all git changes and commit it with a meaningful log in zh-tw'
