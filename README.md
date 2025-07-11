@@ -271,7 +271,18 @@ git config --global init.defaultBranch main
 git config --global credential.https://dev.azure.com.useHttpPath true
 ```
 
-### 安裝 [Gemini CLI](https://github.com/google-gemini/gemini-cli/)
+### 安裝 [Codex CLI](https://github.com/openai/codex) 程式設計代理人工具
+
+我有翻譯一份 [Gemini CLI 使用手冊](https://gemini-cli.gh.miniasp.com/)，可以參考看看。
+
+```sh
+npm install -g @openai/codex
+
+# 使用 ChatGPT 登入 Codex CLI
+codex login
+```
+
+### 安裝 [Gemini CLI](https://github.com/google-gemini/gemini-cli/) 程式設計代理人工具
 
 我有翻譯一份 [Gemini CLI 使用手冊](https://gemini-cli.gh.miniasp.com/)，可以參考看看。
 
@@ -294,6 +305,34 @@ curl -s https://gist.githubusercontent.com/doggy8088/de7f2cfcdecf34e09f2349a8c68
 
 ```sh
 gemini-init
+```
+
+### 安裝 [Claude Code](https://www.anthropic.com/claude-code) 程式設計代理人工具
+
+```sh
+npm install -g @anthropic-ai/claude-code
+
+# 設定任務完成的鈴聲
+claude config set --global preferredNotifChannel terminal_bell
+
+# 設定暗黑佈景主題
+claude config set -g theme dark
+
+# CI 模式必須關閉 verbose
+claude config set -g verbose false
+```
+
+### 安裝 [uv](https://docs.astral.sh/uv/getting-started/installation/) 工具 (Python)
+
+```sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv -V
+```
+
+如果要執行一個 Python 程式，可以這樣執行：
+
+```sh
+uv run main.py
 ```
 
 ### 設定 Vim 編輯器
