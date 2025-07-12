@@ -165,11 +165,19 @@ sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
 # Installing essential packages...
 sudo apt update && sudo apt install -y net-tools ripgrep jq lftp moreutils btop bat wslu zip
 
-# yq: https://github.com/mikefarah/yq
-sudo wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && sudo chmod +x /usr/local/bin/yq
-
-mkdir -p ~/.local/bin
+# 將 batcat 建立一個 symbolic link 為 bat，方便日後使用
 ln -s /usr/bin/batcat ~/.local/bin/bat
+
+# yq: https://github.com/mikefarah/yq
+curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o ~/.local/bin/yq && chmod +x ~/.local/bin/yq
+
+# DotSlash: https://dotslash-cli.com/
+curl -LSfs "https://github.com/facebook/dotslash/releases/latest/download/dotslash-ubuntu-22.04.$(uname -m).tar.gz" | tar fxz - -C ~/.local/bin
+
+# 建立自用的執行檔目錄
+mkdir -p ~/.local/bin
+source ~/.profile
+
 ```
 
 以下列出上述安裝工具的相關連結：

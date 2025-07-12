@@ -34,9 +34,11 @@ ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 # Installing essential packages...
 apt install -y tzdata net-tools ripgrep jq lftp moreutils btop bat zip lsb-release wget curl vim git
 
-# yq: https://github.com/mikefarah/yq
-wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
+# 將 batcat 建立一個 symbolic link 為 bat，方便日後使用
+ln -s /usr/bin/batcat ~/.local/bin/bat
 
+
+# 設定自用的執行檔目錄所需的 PATH 環境變數
 cat <<'EOF' | tee -a ~/.profile > /dev/null
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -49,10 +51,15 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 EOF
 
+# 建立自用的執行檔目錄
 mkdir -p ~/.local/bin
 source ~/.profile
 
-ln -s /usr/bin/batcat ~/.local/bin/bat
+# yq: https://github.com/mikefarah/yq
+curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o ~/.local/bin/yq && chmod +x ~/.local/bin/yq
+
+# DotSlash: https://dotslash-cli.com/
+curl -LSfs "https://github.com/facebook/dotslash/releases/latest/download/dotslash-ubuntu-22.04.$(uname -m).tar.gz" | tar fxz - -C ~/.local/bin
 ```
 
 ### 設定 Node.js 環境
@@ -228,13 +235,13 @@ ghce -h
 
 [AIChat: All-in-one LLM CLI Tool](https://github.com/sigoden/aichat) 是一個多合一的 LLM CLI 工具，具有 Shell 助理、CMD & REPL 模式、RAG、AI 工具與代理等功能，讓你再也不必記憶指令。
 
-以下這個命令會將 `aichat` 最新版下載並解壓縮到 `/usr/local/bin/aichat` 路徑下：
+以下這個命令會將 `aichat` 最新版下載並解壓縮到 `~/.local/bin/aichat` 路徑下：
 
 ```sh
 AIChatVersion=$(curl -s "https://api.github.com/repos/sigoden/aichat/releases/latest" | jq -r .tag_name)
 bash -c "
   curl -sL https://github.com/sigoden/aichat/releases/download/${AIChatVersion}/aichat-${AIChatVersion}-x86_64-unknown-linux-musl.tar.gz \
-    | tar -xzO aichat > /usr/local/bin/aichat && chmod +x /usr/local/bin/aichat
+    | tar -xzO aichat > ~/.local/bin/aichat && chmod +x ~/.local/bin/aichat
 "
 aichat -V
 ```
@@ -312,7 +319,9 @@ gemini
 安裝 Gemini CLI 設定精靈
 
 ```sh
-mkdir -p ~/.local/bin && curl -sSL https://github.com/doggy8088/gemini-init/raw/main/gemini-init -o ~/.local/bin/gemini-init && chmod +x ~/.local/bin/gemini-init
+mkdir -p ~/.local/bin \
+  && curl -sSL https://github.com/doggy8088/gemini-init/raw/main/gemini-init -o ~/.local/bin/gemini-init \
+  && chmod +x ~/.local/bin/gemini-init
 ```
 
 之後在任意資料夾就可以用以下命令快速初始化常用 Gemini CLI 設定：
