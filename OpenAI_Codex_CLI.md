@@ -279,6 +279,16 @@ model          = "model-router"
 EOF
 ```
 
+## 使用 DotSlash 安裝 Codex CLI (Rust) 版本
+
+```sh
+# 安裝 Codex CLI (Rust)
+curl -s "https://github.com/openai/codex/releases/download/$(curl -s "https://api.github.com/repos/openai/codex/releases/latest" | jq -r .tag_name)/codex" -o ~/.local/bin/codex \
+  && chmod +x ~/.local/bin/codex
+
+codex --version
+```
+
 ## 相關連結
 
 - <https://github.com/openai/codex>
