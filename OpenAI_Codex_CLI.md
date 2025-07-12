@@ -52,7 +52,7 @@
    codex 'hi'
    ```
 
-## 從原始碼建置 codex 工具
+## 從原始碼建置 codex (Node.js) 工具
 
 ```sh
 # 設定 Git 配置，避免 Windows CRLF 換行符號問題
@@ -146,7 +146,7 @@ source ~/.bashrc
 echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 ```
 
-## 如何設定 Azure OpenAI 金鑰給 codex 工具使用
+## 如何設定 Azure OpenAI 金鑰給 codex (Node.js) 工具使用
 
 由於 OpenAI 發佈到 npm registry 的 Codex CLI 一直都不支援 Azure OpenAI Service，每次都必須要從原始碼建置實在是太麻煩了，所以我自己發佈了一版沒問題的，安裝方式如下：
 
@@ -196,6 +196,88 @@ codex
 
 💡 注意: 透過 [Azure OpenAI Responses API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses?WT.mc_id=DT-MVP-4015686&tabs=rest-api) 就只有 `o4-mini` 與 `codex-mini` 模型可以設定！
 
+## 從原始碼建置 codex (Rust) 工具
+
+```sh
+# 安裝必要的建置工具
+sudo apt install -y build-essential pkg-config libssl-dev
+
+# Clone the repository and navigate to the root of the Cargo workspace.
+git clone https://github.com/openai/codex.git
+cd codex/codex-rs
+
+# Install the Rust toolchain, if necessary.
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source "$HOME/.cargo/env"
+rustup component add rustfmt
+rustup component add clippy
+
+# Build Codex.
+cargo build
+
+# Launch the TUI with a sample prompt.
+cargo run --bin codex -- "explain this codebase to me"
+
+# After making changes, ensure the code is clean.
+cargo fmt -- --config imports_granularity=Item
+cargo clippy --tests
+
+# Run the tests.
+cargo test
+
+# Install
+cargo install --path cli
+```
+
+## 如何設定 Azure OpenAI 金鑰給 codex (Rust) 工具使用
+
+> 💡 記得要先有 `AZURE_OPENAI_API_KEY` 環境變數，底下命令也要記得把 `YOUR-RESOURCE-NAME` 換成你的資源名稱。
+
+```sh
+mkdir -p ~/.codex
+
+cat <<'EOF' | tee ~/.codex/config.toml > /dev/null
+approval_policy = "on-failure"
+sandbox_mode = "workspace-write"
+model_reasoning_effort = "high"
+model_reasoning_summary = "detailed"
+
+model_provider = "azure"
+model          = "codex-mini"            # pick whatever you want as your day-to-day default
+
+[model_providers.azure]
+name         = "Azure OpenAI"
+base_url     = "https://YOUR-RESOURCE-NAME.openai.azure.com/openai"
+env_key      = "AZURE_OPENAI_API_KEY"
+wire_api     = "responses"                   
+query_params = { api-version = "2025-04-01-preview" }
+
+# ----------  one profile per model  ----------
+[profiles.o3]
+model_provider = "azure"
+model          = "o3"
+
+[profiles.o3-pro]
+model_provider = "azure"
+model          = "o3-pro"
+
+[profiles.o4-mini]
+model_provider = "azure"
+model          = "o4-mini"
+
+[profiles.codex-mini]
+model_provider = "azure"
+model          = "codex-mini"
+
+[profiles.gpt-4.1]
+model_provider = "azure"
+model          = "gpt-4.1"
+
+[profiles.model-router]
+model_provider = "azure"
+model          = "model-router"
+EOF
+```
 
 ## 相關連結
 
