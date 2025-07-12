@@ -148,49 +148,54 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 
 ## 如何設定 Azure OpenAI 金鑰給 codex 工具使用
 
-1. 設定環境變數到 `~/.profile`
+由於 OpenAI 發佈到 npm registry 的 Codex CLI 一直都不支援 Azure OpenAI Service，每次都必須要從原始碼建置實在是太麻煩了，所以我自己發佈了一版沒問題的，安裝方式如下：
 
-    ```sh
-    # Azure OpenAI Service
-    export AZURE_BASE_URL="https://YOUR-RESOURCE-NAME.openai.azure.com/openai"
-    export AZURE_OPENAI_API_KEY='YOUR-API-KEY'
+```sh
+npm i -g @willh/codex
+```
 
-    export CODEX_UNSAFE_ALLOW_NO_SANDBOX=1
-    export CODEX_SANDBOX_NETWORK_DISABLED=0
+基本上，要支援 Azure OpenAI Service 只需要設定兩個環境變數到 `~/.profile` 即可：
 
-    # Telegram Bot Token
-    # https://core.telegram.org/bots#botfather
-    export TG_BOT_TOKEN=''
-    ```
+```sh
+cat <<'EOF' | tee -a ~/.profile > /dev/null
+# Azure OpenAI Service
+export AZURE_BASE_URL="https://YOUR-RESOURCE-NAME.openai.azure.com/openai"
+export AZURE_OPENAI_API_KEY='YOUR-API-KEY'
 
-    💡 注意: `AZURE_DEPLOYMENT_NAME` 只有 `o4-mini` 與 `codex-mini` 可以設定！
+export CODEX_UNSAFE_ALLOW_NO_SANDBOX=1
+export CODEX_SANDBOX_NETWORK_DISABLED=0
+EOF
 
-2. 調整 Codex CLI 設定檔 ( `~/.codex/config.json` )
+source ~/.profile
+```
 
-    這個 `~/.codex/config.json` 檔案其實不用設定，沒設定的時候，Codex CLI 要這樣執行：
+接著直接執行就可以了：
 
-    ```sh
-    codex -p azure -m codex-mini
-    ```
+```sh
+codex -p azure -m codex-mini
+```
 
-    如果 `~/.codex/config.json` 有設定以下內容的話：
+> 💡 注意: 這裡的 `-m` 是 Azure OpenAI Service 的 Deployment name，並非是模型名稱，但建立 Deployment 的時候，模型一定要選擇 `o4-mini` 或 `codex-mini` 才可以！
 
-    ```json
-    {
-        "model": "codex-mini",
-        "provider": "azure"
-    }
-    ```
+如果常用的話，是可以調整 Codex CLI 設定檔 ( `~/.codex/config.json` ) 將 `azure` 提供者設定為預設值：
 
-   就可以變成預設值，啟動時就比較簡單：
+```json
+cat <<'EOF' | tee ~/.codex/config.json > /dev/null
+{
+   "model": "codex-mini",
+   "provider": "azure"
+}
+EOF
+```
 
-    ```sh
-    codex
-    ```
+設定好之後，啟動時就比較簡單，預設就是使用 `azure` 提供者與 `codex-mini` 模型：
 
-    💡 注意: 透過 [Azure OpenAI Responses API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses?WT.mc_id=DT-MVP-4015686&tabs=rest-api) 就只有 `o4-mini` 與 `codex-mini` 模型可以設定！
+```sh
+codex
+```
 
-3. 設定完就可以預設用 Azure OpenAI Services 的端點執行！
+💡 注意: 透過 [Azure OpenAI Responses API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses?WT.mc_id=DT-MVP-4015686&tabs=rest-api) 就只有 `o4-mini` 與 `codex-mini` 模型可以設定！
+
 
 ## 相關連結
 
