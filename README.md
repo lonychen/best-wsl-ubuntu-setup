@@ -153,7 +153,8 @@ echo "david ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/david
 
 ```sh
 # set timezone to +0800
-sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
+    && sudo dpkg-reconfigure --frontend noninteractive tzdata
 ```
 
 ### 安裝常用的工具
@@ -232,11 +233,19 @@ code .
 
 ```sh
 # Install Starship
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sh -s -- -y
+
 # 參考設定 https://starship.rs/config/
 mkdir -p ~/.config && touch ~/.config/starship.toml
+
 # 安裝預設主題 https://starship.rs/presets/catppuccin-powerline
 starship preset catppuccin-powerline -o ~/.config/starship.toml
+
+cat <<'EOF' | tee -a ~/.bashrc > /dev/null
+eval "$(starship init bash)"
+EOF
+
+source ~/.bashrc
 ```
 
 ### 安裝 [fzf](https://github.com/junegunn/fzf) 工具
@@ -313,15 +322,16 @@ cat ~/.vimrc | sudo tee /root/.vimrc
 
 gh help environment
 
+gh auth login --web -h github.com
+gh auth status
+
 gh extension install github/gh-copilot
 gh extension upgrade github/gh-copilot
 
 gh copilot --help
 
 echo 'eval "$(gh copilot alias -- bash)"' >> ~/.bashrc
-
-gh auth login --web -h github.com
-gh auth status
+source ~/.bashrc
 ```
 
 ```txt
