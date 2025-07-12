@@ -273,8 +273,6 @@ git config --global credential.https://dev.azure.com.useHttpPath true
 
 ### 安裝 [Codex CLI](https://github.com/openai/codex) 程式設計代理人工具
 
-我有翻譯一份 [Gemini CLI 使用手冊](https://gemini-cli.gh.miniasp.com/)，可以參考看看。
-
 ```sh
 npm install -g @openai/codex
 
