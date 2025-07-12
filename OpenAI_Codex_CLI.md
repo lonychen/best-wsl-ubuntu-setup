@@ -72,26 +72,28 @@ mkdir projects; cd projects
 echo "⬇️ 下載 OpenAI Codex 原始碼..."
 git clone https://github.com/openai/codex.git
 cd codex
-git checkout 7896b1089dbf702dd07929910504e9558a20d085
+
+# 鎖定版本在 Jul 12, 2025 的最新版 Commit 上
+git checkout bfeb8c92a591e8f20ecabb2a1b5a22e1574e7951
+
 cd codex-cli
 
 # 獲取並套用社群貢獻的 Pull Request 修正
 # 這些是 Will 保哥提交的重要修正
+# https://github.com/openai/codex/pulls/doggy8088
 echo "🔧 套用社群修正補丁..."
 git fetch origin '+refs/pull/*/head:refs/remotes/origin/pr/*'
-echo "   - 套用 PR #1004 修正..."
+echo "   - 套用 PR #1004 修正...日誌檔名不應使用冒號字元"
 git cherry-pick origin/pr/1004
-echo "   - 套用 PR #1121 修正..."
+echo "   - 套用 PR #1121 修正...codex -v <rollout> 無法正常運作"
 git cherry-pick origin/pr/1121
-echo "   - 套用 PR #1122 修正..."
-git cherry-pick origin/pr/1122
-echo "   - 套用 PR #1125 修正..."
+echo "   - 套用 PR #1125 修正...如果使用者已明確標記環境已足夠鎖定，則允許在沒有沙盒的情況下執行。"
 git cherry-pick origin/pr/1125
-echo "   - 套用 PR #1130 修正..."
+echo "   - 套用 PR #1130 修正...在文件中闡明專案文件發現與合併的邏輯"
 git cherry-pick origin/pr/1130
-echo "   - 套用 PR #1134 修正..."
+echo "   - 套用 PR #1134 修正...為 codex 新增完整的 bash 自動完成功能"
 git cherry-pick origin/pr/1134
-echo "   - 套用 PR #1143 修正..."
+echo "   - 套用 PR #1143 修正...修正 yq 不需要 -o=json 參數"
 git cherry-pick origin/pr/1143
 
 # 啟用 Node.js Corepack 套件管理器
@@ -150,7 +152,7 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 
     ```sh
     # Azure OpenAI Service
-    export AZURE_DEPLOYMENT_NAME='o4-mini'
+    export AZURE_DEPLOYMENT_NAME='codex-mini-20250519'
     export AZURE_RESOURCE_NAME='your-resource-name'
     export AZURE_BASE_URL="https://${AZURE_RESOURCE_NAME}.openai.azure.com/openai"
     export AZURE_OPENAI_API_VERSION='2025-04-01-preview'
@@ -165,14 +167,18 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
     export CODEX_SANDBOX_NETWORK_DISABLED=0
     ```
 
+    💡 注意: `AZURE_DEPLOYMENT_NAME` 只有 `o4-mini` 與 `codex-mini-20250519` 可以設定！
+
 2. 設定 Codex CLI 設定檔 `~/.codex/config.json`
 
     ```json
     {
-        "model": "o4-mini",
-        "provider": "AzureOpenAI"
+        "model": "codex-mini-20250519",
+        "provider": "azure"
     }
     ```
+
+    💡 注意: `model` 只有 `o4-mini` 與 `codex-mini-20250519` 可以設定！
 
 3. 設定完就可以預設用 Azure OpenAI Services 的端點執行！
 
