@@ -389,8 +389,15 @@ aichat --sync-models
 
 ### 安裝 [Codex CLI](https://github.com/openai/codex) 程式設計代理人工具
 
+目前 Codex CLI 有兩個版本：
+
+1. 一個是 Node.js 寫的，功能相對完整，但現已半放棄狀態，官方已不再維護。
+2. 一個是 Rust 寫的版本，目前正積極開發中，功能陸續完善，是個明日之星。
+
+以下是 Codex CLI 的 Node.js 版本的安裝方式：
+
 ```sh
-# 安裝 Codex CLI
+# 安裝 Codex CLI (Node.js)
 npm install -g @openai/codex
 
 # 查看版本(codex-cli 0.5.0)
@@ -400,7 +407,19 @@ codex --version
 codex login
 ```
 
-> 💡 目前 (2025-07-12) 這個 codex `0.5.0` 版本完全無法使用 Azure OpenAI Services 的端點。如果要使用 Azure OpenAI Services 的端點與金鑰，必須參考 [OpenAI_Codex_CLI.md](OpenAI_Codex_CLI.md) 從原始碼開始建置 `codex` 程式才能用。( [Issue #1552](https://github.com/openai/codex/issues/1552) )
+開啟畫面上的登入連結，走完 OAuth 授權流程後，將瀏覽器最後的網址透過以下命令在容器內執行：
+
+```sh
+curl -v -L 'http://localhost:1455/success?xxxxxxplatform.openai.com'
+```
+
+> 💡 目前 (2025-07-12) 這個 codex `0.5.0` 版本完全無法使用 Azure OpenAI Services 的端點。
+
+如果要使用 Azure OpenAI Services 的端點與金鑰，必須參考 [OpenAI_Codex_CLI.md](OpenAI_Codex_CLI.md) 從原始碼開始建置 `codex` 程式才能用。但我有自己發佈一個可用的版本：
+
+```sh
+npm install -g @willh/codex
+```
 
 ### 安裝 [Gemini CLI](https://github.com/google-gemini/gemini-cli/) 程式設計代理人工具
 
