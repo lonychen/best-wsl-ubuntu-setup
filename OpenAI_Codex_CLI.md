@@ -150,7 +150,7 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 
     ```sh
     # Azure OpenAI Service
-    export AZURE_DEPLOYMENT_NAME='codex-mini'
+    export AZURE_DEPLOYMENT_NAME='o4-mini'
     export AZURE_RESOURCE_NAME='your-resource-name'
     export AZURE_BASE_URL="https://${AZURE_RESOURCE_NAME}.openai.azure.com/openai"
     export AZURE_OPENAI_API_VERSION='2025-04-01-preview'
