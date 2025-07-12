@@ -169,7 +169,7 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 
     ```json
     {
-        "model": "codex-mini",
+        "model": "o4-mini",
         "provider": "AzureOpenAI"
     }
     ```
