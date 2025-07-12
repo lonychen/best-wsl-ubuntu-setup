@@ -152,12 +152,9 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 
     ```sh
     # Azure OpenAI Service
-    export AZURE_DEPLOYMENT_NAME='codex-mini-20250519'
     export AZURE_RESOURCE_NAME='your-resource-name'
     export AZURE_BASE_URL="https://${AZURE_RESOURCE_NAME}.openai.azure.com/openai"
-    export AZURE_OPENAI_API_VERSION='2025-04-01-preview'
     export AZURE_OPENAI_API_KEY='your-api-key-from-azure'
-    export OPENAI_API_KEY=$AZURE_OPENAI_API_KEY
 
     # Telegram Bot Token
     # https://core.telegram.org/bots#botfather
@@ -165,6 +162,8 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 
     export CODEX_UNSAFE_ALLOW_NO_SANDBOX=1
     export CODEX_SANDBOX_NETWORK_DISABLED=0
+
+    export NODE_NO_WARNINGS=1
     ```
 
     💡 注意: `AZURE_DEPLOYMENT_NAME` 只有 `o4-mini` 與 `codex-mini-20250519` 可以設定！
@@ -184,6 +183,8 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 
 ## 相關連結
 
+- <https://github.com/openai/codex>
+- [Securely Turbo‑Charge Your Software Delivery with Codex Coding Agent on Azure OpenAI | All things Azure](https://devblogs.microsoft.com/all-things-azure/securely-turbo%E2%80%91charge-your-software-delivery-with-the-codex-coding-agent-on-azure-openai/)
 - [Developing inside a Container](https://code.visualstudio.com/docs/devcontainers/containers)
 - [Development Containers](https://containers.dev/)
-- <https://github.com/openai/codex>
+
