@@ -11,12 +11,20 @@ docker run -it --name=codex ubuntu:24.04
 ## 隨時更新 Ubuntu 到最新版本
 
 ```sh
-apt update && apt upgrade -y
+apt update
+apt upgrade -y
 ```
 
 > 💡 容器中預設就是以 `root` 身分登入，所以不需要執行 `sudo` 命令。
 
 > 💡 建議不要執行 `apt dist-upgrade -y`
+
+### 設定作業系統時區
+
+```sh
+# set timezone to +0800
+ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+```
 
 ### 安裝常用的工具
 
@@ -24,7 +32,7 @@ apt update && apt upgrade -y
 
 ```sh
 # Installing essential packages...
-apt install -y net-tools ripgrep jq lftp moreutils btop bat zip lsb-release wget curl vim git
+apt install -y tzdata net-tools ripgrep jq lftp moreutils btop bat zip lsb-release wget curl vim git
 
 # yq: https://github.com/mikefarah/yq
 wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq && chmod +x /usr/local/bin/yq
@@ -41,18 +49,10 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 EOF
 
+mkdir -p ~/.local/bin
 source ~/.profile
 
-mkdir -p ~/.local/bin
 ln -s /usr/bin/batcat ~/.local/bin/bat
-```
-
-### 設定作業系統時區
-
-```sh
-# set timezone to +0800
-ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
-    && dpkg-reconfigure --frontend noninteractive tzdata
 ```
 
 ### 設定 Node.js 環境
@@ -96,7 +96,7 @@ chmod 600 ~/.ssh/authorized_keys
 # Remember add your SSH key to GitHub: $(cat ~/.ssh/id_rsa.pub)"
 
 # setup workspace
-mkdir -p ~/projects && cd ~/projects
+mkdir -p ~/projects
 ```
 
 ### 設定華麗的 Bash 提示符號
@@ -277,6 +277,39 @@ codex login
 
 ```sh
 curl -v -L 'http://localhost:1455/success?xxxxxxplatform.openai.com'
+```
+
+> 💡 目前 (2025-07-12) 這個 codex `0.5.0` 版本完全無法使用 Azure OpenAI Services 的端點。如果要使用 Azure OpenAI Services 的端點與金鑰，必須參考 [OpenAI_Codex_CLI.md](OpenAI_Codex_CLI.md) 從原始碼開始建置 `codex` 程式才能用。
+
+如果要設定 Azure OpenAI Services 的端點與金鑰，我原本預期可以這樣設定
+
+1. 建立 `AZURE_OPENAI_API_KEY` 環境變數
+2. 建立 `~/.codex/config.toml` 設定檔
+
+但目前 `v0.5.0` 這樣的設定完全不能用：
+
+```sh
+mkdir -p ~/.codex
+
+cat <<'EOF' | tee ~/.codex/config.toml > /dev/null
+model_provider = "azure"
+
+[model_providers.azure]
+name = "Azure"
+base_url = "https://YOUR-RESOURCE-NAME.openai.azure.com/openai"
+env_key = "AZURE_OPENAI_API_KEY"
+query_params = { api-version = "2025-04-01-preview" }
+wire_api = "responses"
+
+[profiles.codex-mini]
+model_provider = "azure"
+model = "codex-mini"
+
+[profiles.o4-mini]
+model_provider = "azure"
+model = "o4-mini"
+EOF
+
 ```
 
 ### 安裝 [Gemini CLI](https://github.com/google-gemini/gemini-cli/) 程式設計代理人工具

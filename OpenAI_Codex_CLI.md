@@ -152,32 +152,43 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 
     ```sh
     # Azure OpenAI Service
-    export AZURE_RESOURCE_NAME='your-resource-name'
-    export AZURE_BASE_URL="https://${AZURE_RESOURCE_NAME}.openai.azure.com/openai"
-    export AZURE_OPENAI_API_KEY='your-api-key-from-azure'
-
-    # Telegram Bot Token
-    # https://core.telegram.org/bots#botfather
-    export TG_BOT_TOKEN=''
+    export AZURE_BASE_URL="https://YOUR-RESOURCE-NAME.openai.azure.com/openai"
+    export AZURE_OPENAI_API_KEY='YOUR-API-KEY'
 
     export CODEX_UNSAFE_ALLOW_NO_SANDBOX=1
     export CODEX_SANDBOX_NETWORK_DISABLED=0
 
-    export NODE_NO_WARNINGS=1
+    # Telegram Bot Token
+    # https://core.telegram.org/bots#botfather
+    export TG_BOT_TOKEN=''
     ```
 
-    💡 注意: `AZURE_DEPLOYMENT_NAME` 只有 `o4-mini` 與 `codex-mini-20250519` 可以設定！
+    💡 注意: `AZURE_DEPLOYMENT_NAME` 只有 `o4-mini` 與 `codex-mini` 可以設定！
 
-2. 設定 Codex CLI 設定檔 `~/.codex/config.json`
+2. 調整 Codex CLI 設定檔 ( `~/.codex/config.json` )
+
+    這個 `~/.codex/config.json` 檔案其實不用設定，沒設定的時候，Codex CLI 要這樣執行：
+
+    ```sh
+    codex -p azure -m codex-mini
+    ```
+
+    如果 `~/.codex/config.json` 有設定以下內容的話：
 
     ```json
     {
-        "model": "codex-mini-20250519",
+        "model": "codex-mini",
         "provider": "azure"
     }
     ```
 
-    💡 注意: `model` 只有 `o4-mini` 與 `codex-mini-20250519` 可以設定！
+   就可以變成預設值，啟動時就比較簡單：
+
+    ```sh
+    codex
+    ```
+
+    💡 注意: 透過 [Azure OpenAI Responses API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/responses?WT.mc_id=DT-MVP-4015686&tabs=rest-api) 就只有 `o4-mini` 與 `codex-mini` 模型可以設定！
 
 3. 設定完就可以預設用 Azure OpenAI Services 的端點執行！
 
