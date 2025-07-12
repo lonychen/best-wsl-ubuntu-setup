@@ -221,7 +221,7 @@ chmod 600 ~/.ssh/authorized_keys
 # Remember add your SSH key to GitHub: $(cat ~/.ssh/id_rsa.pub)"
 
 # setup workspace
-mkdir -p ~/projects && cd ~/projects
+mkdir -p ~/projects
 
 # setup VS Code
 code .
@@ -390,9 +390,13 @@ aichat --sync-models
 ### 安裝 [Codex CLI](https://github.com/openai/codex) 程式設計代理人工具
 
 ```sh
+# 安裝 Codex CLI
 npm install -g @openai/codex
 
-# 使用 ChatGPT 登入 Codex CLI
+# 查看版本(codex-cli 0.5.0)
+codex --version
+
+# 使用 ChatGPT 帳號登入並取得 API Key
 codex login
 ```
 

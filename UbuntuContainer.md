@@ -267,9 +267,13 @@ aichat hi
 ### 安裝 [Codex CLI](https://github.com/openai/codex) 程式設計代理人工具
 
 ```sh
+# 安裝 Codex CLI
 npm install -g @openai/codex
 
-# 使用 ChatGPT 登入 Codex CLI
+# 查看版本(codex-cli 0.5.0)
+codex --version
+
+# 使用 ChatGPT 帳號登入並取得 API Key
 codex login
 ```
 
@@ -281,7 +285,7 @@ curl -v -L 'http://localhost:1455/success?xxxxxxplatform.openai.com'
 
 > 💡 目前 (2025-07-12) 這個 codex `0.5.0` 版本完全無法使用 Azure OpenAI Services 的端點。如果要使用 Azure OpenAI Services 的端點與金鑰，必須參考 [OpenAI_Codex_CLI.md](OpenAI_Codex_CLI.md) 從原始碼開始建置 `codex` 程式才能用。
 
-如果要設定 Azure OpenAI Services 的端點與金鑰，我原本預期可以這樣設定
+如果要設定 Azure OpenAI Services 的端點與金鑰，我原本預期可以這樣設定：
 
 1. 建立 `AZURE_OPENAI_API_KEY` 環境變數
 2. 建立 `~/.codex/config.toml` 設定檔
