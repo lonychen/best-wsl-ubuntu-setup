@@ -167,7 +167,7 @@ echo "🎉 本地 OpenAI Codex CLI 安裝完成！"
 
 2. 設定 Codex CLI 設定檔 `~/.codex/config.json`
 
-    ```sh
+    ```json
     {
         "model": "codex-mini",
         "provider": "azure"
