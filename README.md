@@ -271,68 +271,6 @@ git config --global init.defaultBranch main
 git config --global credential.https://dev.azure.com.useHttpPath true
 ```
 
-### 安裝 [Codex CLI](https://github.com/openai/codex) 程式設計代理人工具
-
-```sh
-npm install -g @openai/codex
-
-# 使用 ChatGPT 登入 Codex CLI
-codex login
-```
-
-### 安裝 [Gemini CLI](https://github.com/google-gemini/gemini-cli/) 程式設計代理人工具
-
-我有翻譯一份 [Gemini CLI 使用手冊](https://gemini-cli.gh.miniasp.com/)，可以參考看看。
-
-```sh
-npm install -g @google/gemini-cli && gemini -v
-
-# 設定 Gemini CLI 登入
-gemini
-```
-
-安裝 Gemini CLI 設定精靈
-
-```sh
-mkdir -p ~/.local/bin && curl -sSL https://github.com/doggy8088/gemini-init/raw/main/gemini-init -o ~/.local/bin/gemini-init && chmod +x ~/.local/bin/gemini-init
-```
-
-之後在任意資料夾就可以用以下命令快速初始化常用 Gemini CLI 設定：
-
-```sh
-gemini-init
-```
-
-> 此命令會寫入 `.gemini/settings.json` 設定檔。
-
-### 安裝 [Claude Code](https://www.anthropic.com/claude-code) 程式設計代理人工具
-
-```sh
-npm install -g @anthropic-ai/claude-code
-
-# 設定任務完成的鈴聲
-claude config set --global preferredNotifChannel terminal_bell
-
-# 設定暗黑佈景主題
-claude config set -g theme dark
-
-# CI 模式必須關閉 verbose
-claude config set -g verbose false
-```
-
-### 安裝 [uv](https://docs.astral.sh/uv/getting-started/installation/) 工具 (Python)
-
-```sh
-curl -LsSf https://astral.sh/uv/install.sh | sh
-uv -V
-```
-
-如果要執行一個 Python 程式，可以這樣執行：
-
-```sh
-uv run main.py
-```
-
 ### 設定 Vim 編輯器
 
 Vim 是一個非常強大的文字編輯器，雖然它的學習曲線有點陡峭，但一旦掌握了，就會發現它的效率非常高。
@@ -439,6 +377,67 @@ EOF
 aichat --sync-models
 ```
 
+### 安裝 [Codex CLI](https://github.com/openai/codex) 程式設計代理人工具
+
+```sh
+npm install -g @openai/codex
+
+# 使用 ChatGPT 登入 Codex CLI
+codex login
+```
+
+### 安裝 [Gemini CLI](https://github.com/google-gemini/gemini-cli/) 程式設計代理人工具
+
+我有翻譯一份 [Gemini CLI 使用手冊](https://gemini-cli.gh.miniasp.com/)，可以參考看看。
+
+```sh
+npm install -g @google/gemini-cli && gemini -v
+
+# 設定 Gemini CLI 登入
+gemini
+```
+
+安裝 Gemini CLI 設定精靈
+
+```sh
+mkdir -p ~/.local/bin && curl -sSL https://github.com/doggy8088/gemini-init/raw/main/gemini-init -o ~/.local/bin/gemini-init && chmod +x ~/.local/bin/gemini-init
+```
+
+之後在任意資料夾就可以用以下命令快速初始化常用 Gemini CLI 設定：
+
+```sh
+gemini-init
+```
+
+> 此命令會寫入 `.gemini/settings.json` 設定檔。
+
+### 安裝 [Claude Code](https://www.anthropic.com/claude-code) 程式設計代理人工具
+
+```sh
+npm install -g @anthropic-ai/claude-code
+
+# 設定任務完成的鈴聲
+claude config set --global preferredNotifChannel terminal_bell
+
+# 設定暗黑佈景主題
+claude config set -g theme dark
+
+# CI 模式必須關閉 verbose
+claude config set -g verbose false
+```
+
+### 安裝 [uv](https://docs.astral.sh/uv/getting-started/installation/) 工具 (Python)
+
+```sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv -V
+```
+
+如果要執行一個 Python 程式，可以這樣執行：
+
+```sh
+uv run main.py
+```
 
 ### 安裝 Google Cloud SDK
 
