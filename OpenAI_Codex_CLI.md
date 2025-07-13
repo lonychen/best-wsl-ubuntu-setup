@@ -283,7 +283,7 @@ EOF
 
 ```sh
 # 安裝 Codex CLI (Rust)
-curl -s "https://github.com/openai/codex/releases/download/$(curl -s "https://api.github.com/repos/openai/codex/releases/latest" | jq -r .tag_name)/codex" -o ~/.local/bin/codex \
+curl -sSL "https://github.com/openai/codex/releases/download/$(curl -s "https://api.github.com/repos/openai/codex/releases/latest" | jq -r .tag_name)/codex" -o ~/.local/bin/codex \
   && chmod +x ~/.local/bin/codex
 
 codex --version
