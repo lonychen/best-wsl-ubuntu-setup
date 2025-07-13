@@ -163,7 +163,8 @@ sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
 
 ```sh
 # Installing essential packages...
-sudo apt update && sudo apt install -y net-tools ripgrep jq lftp moreutils btop bat wslu zip
+sudo apt update && sudo apt install -y wslu \
+  net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2
 
 # 將 batcat 建立一個 symbolic link 為 bat，方便日後使用
 ln -s /usr/bin/batcat ~/.local/bin/bat

@@ -32,7 +32,9 @@ ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ```sh
 # Installing essential packages...
-apt install -y tzdata net-tools ripgrep jq lftp moreutils btop bat zip lsb-release wget curl vim git
+apt install -y tzdata lsb-release git wget curl vim man-db \
+    net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
+    aggregate dnsutils iproute2 iptables ipset
 
 # 將 batcat 建立一個 symbolic link 為 bat，方便日後使用
 ln -s /usr/bin/batcat ~/.local/bin/bat
