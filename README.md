@@ -211,6 +211,9 @@ node -v
 ```sh
 # profile setup
 cat <<'EOF' | tee -a ~/.profile
+# 這是從 WSL 取得 Windows 使用者名稱最簡單的方法
+export WINDOWS_USERNAME=$(powershell.exe '$env:UserName')
+
 export EDITOR=vim
 export GPG_TTY=$(tty)
 EOF
