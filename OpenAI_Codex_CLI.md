@@ -279,14 +279,27 @@ model          = "model-router"
 EOF
 ```
 
+## 直接下載 Linux Binary 版本安裝 Codex CLI (Rust)
+
+這種安裝方法可以順利使用 Azure OpenAI Service 服務！
+
+```sh
+# 安裝 Codex CLI (Rust)
+curl -o- -sL https://github.com/openai/codex/releases/download/$(curl -s "https://api.github.com/repos/openai/codex/releases/latest" | jq -r .tag_name)/codex-x86_64-unknown-linux-gnu.tar.gz | tar -xzf - --transform='s/codex-x86_64-unknown-linux-gnu/codex/' -C ~/.local/bin
+```
+
+```sh
+codex --version
+```
+
 ## 使用 DotSlash 安裝 Codex CLI (Rust) 版本
+
+目前這種安裝方法無法使用 Azure OpenAI Service 服務！[尚待釐清問題](https://github.com/openai/codex/issues/1552)！
 
 ```sh
 # 安裝 Codex CLI (Rust)
 curl -sSL "https://github.com/openai/codex/releases/download/$(curl -s "https://api.github.com/repos/openai/codex/releases/latest" | jq -r .tag_name)/codex" -o ~/.local/bin/codex \
   && chmod +x ~/.local/bin/codex
-
-codex --version
 ```
 
 ## 相關連結
