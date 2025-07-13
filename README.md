@@ -169,6 +169,9 @@ sudo apt update && sudo apt install -y wslu \
 # 將 batcat 建立一個 symbolic link 為 bat，方便日後使用
 ln -s /usr/bin/batcat ~/.local/bin/bat
 
+# jq: https://github.com/jqlang/jq
+curl -sL https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o ~/.local/bin/jq && chmod +x ~/.local/bin/jq
+
 # yq: https://github.com/mikefarah/yq
 curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o ~/.local/bin/yq && chmod +x ~/.local/bin/yq
 
