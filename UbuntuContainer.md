@@ -42,7 +42,6 @@ curl -sL https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o ~/.
 # 將 batcat 建立一個 symbolic link 為 bat，方便日後使用
 ln -s /usr/bin/batcat ~/.local/bin/bat
 
-
 # 設定自用的執行檔目錄所需的 PATH 環境變數
 cat <<'EOF' | tee -a ~/.profile > /dev/null
 # set PATH so it includes user's private bin if it exists
@@ -89,6 +88,9 @@ EOF
 ```sh
 # profile setup
 cat <<'EOF' | tee -a ~/.profile
+# 針對暗色背景終端機的明亮色彩配置
+export JQ_COLORS="33:93:93:96:92:97:1;97:4;97"
+
 export EDITOR=vim
 export GPG_TTY=$(tty)
 EOF

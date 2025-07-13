@@ -217,6 +217,9 @@ cat <<'EOF' | tee -a ~/.profile
 # 這是從 WSL 取得 Windows 使用者名稱最簡單的方法
 export WINDOWS_USERNAME=$(powershell.exe '$env:UserName')
 
+# 針對暗色背景終端機的明亮色彩配置
+export JQ_COLORS="33:93:93:96:92:97:1;97:4;97"
+
 export EDITOR=vim
 export GPG_TTY=$(tty)
 EOF
