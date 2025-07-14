@@ -33,7 +33,7 @@ ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 # Installing essential packages...
 apt install -y tzdata lsb-release git wget curl vim man-db \
   net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
-  ffmpeg 7zip poppler-utils fd-find zoxide imagemagick \
+  ffmpeg 7zip poppler-utils fd-find zoxide imagemagick exiftool \
   aggregate dnsutils iproute2 iptables ipset
 
 # Install Rust: https://www.rust-lang.org/tools/install

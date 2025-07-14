@@ -165,7 +165,7 @@ sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
 # Installing essential packages...
 sudo apt update && sudo apt install -y wslu \
   net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
-  ffmpeg 7zip poppler-utils fd-find zoxide imagemagick
+  ffmpeg 7zip poppler-utils fd-find zoxide imagemagick exiftool
 
 # Install Rust: https://www.rust-lang.org/tools/install
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
