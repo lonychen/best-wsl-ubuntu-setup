@@ -11,8 +11,7 @@ docker run -it --name=codex ubuntu:24.04
 ## 隨時更新 Ubuntu 到最新版本
 
 ```sh
-apt update
-apt upgrade -y
+apt update && apt upgrade -y
 ```
 
 > 💡 容器中預設就是以 `root` 身分登入，所以不需要執行 `sudo` 命令。
@@ -33,8 +32,27 @@ ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 ```sh
 # Installing essential packages...
 apt install -y tzdata lsb-release git wget curl vim man-db \
-    net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
-    aggregate dnsutils iproute2 iptables ipset
+  net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
+  ffmpeg 7zip poppler-utils fd-find zoxide imagemagick \
+  aggregate dnsutils iproute2 iptables ipset
+
+# Install Rust: https://www.rust-lang.org/tools/install
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Upgrade Rust is you already installed long time ago
+rustup update stable
+
+# yazi: https://yazi-rs.github.io/
+cargo install --locked yazi-fm yazi-cli
+ya pkg add yazi-rs/flavors:catppuccin-frappe
+cat <<'EOF' | tee -a ~/.bashrc > /dev/null
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+EOF
 
 # jq: https://github.com/jqlang/jq
 curl -sL https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o ~/.local/bin/jq && chmod +x ~/.local/bin/jq

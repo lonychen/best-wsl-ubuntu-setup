@@ -164,7 +164,26 @@ sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
 ```sh
 # Installing essential packages...
 sudo apt update && sudo apt install -y wslu \
-  net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2
+  net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
+  ffmpeg 7zip poppler-utils fd-find zoxide imagemagick
+
+# Install Rust: https://www.rust-lang.org/tools/install
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Upgrade Rust is you already installed long time ago
+rustup update stable
+
+# yazi: https://yazi-rs.github.io/
+cargo install --locked yazi-fm yazi-cli
+ya pkg add yazi-rs/flavors:catppuccin-frappe
+cat <<'EOF' | tee -a ~/.bashrc > /dev/null
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+EOF
 
 # 將 batcat 建立一個 symbolic link 為 bat，方便日後使用
 ln -s /usr/bin/batcat ~/.local/bin/bat
@@ -181,7 +200,6 @@ curl -LSfs "https://github.com/facebook/dotslash/releases/latest/download/dotsla
 # 建立自用的執行檔目錄
 mkdir -p ~/.local/bin
 source ~/.profile
-
 ```
 
 以下列出上述安裝工具的相關連結：
