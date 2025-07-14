@@ -211,7 +211,7 @@ source ~/.profile
 - [moreutils](https://github.com/pgdr/moreutils)：補齊傳統 UNIX 工具缺口的輔助工具集
 - [btop](https://github.com/aristocratos/btop)：互動式系統資源監控元件
 - [wslu](https://github.com/wslutilities/wslu)：Windows Subsystem for Linux 專用的實用工具集
-- [yq](https://github.com/mikefarah/yq)：可處理 YAML⁄JSON⁄INI⁄XML 的命令列解析器
+- [yq](https://github.com/mikefarah/yq)：可處理 YAML/JSON/INI/XML 的命令列解析器
 - [bat](https://github.com/sharkdp/bat)：一個具有語法高亮和 Git 整合的 `cat` 替代命令
 
 ### 設定 Node.js 環境
