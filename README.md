@@ -163,7 +163,7 @@ sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
 
 ```sh
 # Installing essential packages...
-sudo apt update && sudo apt install -y wslu \
+sudo apt update && sudo apt install -y wslu xdg-utils \
   net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
   ffmpeg 7zip poppler-utils fd-find zoxide imagemagick exiftool
 
