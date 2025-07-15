@@ -40,7 +40,8 @@ apt install -y tzdata lsb-release git wget curl vim man-db \
   aggregate dnsutils iproute2 iptables ipset
 
 # Install Rust: https://www.rust-lang.org/tools/install
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source "$HOME/.cargo/env"
 # Upgrade Rust is you already installed long time ago
 rustup update stable
 

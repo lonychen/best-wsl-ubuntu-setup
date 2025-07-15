@@ -157,6 +157,8 @@ sudo apt update && sudo apt upgrade -y
 
 ### 設定作業系統時區
 
+如果時區不正確才需要調整，以下是設定時區到 Asia/Taipei 的命令：
+
 ```sh
 # set timezone to +0800
 sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
@@ -177,7 +179,8 @@ sudo apt update && sudo apt install -y wslu xdg-utils \
   ffmpeg 7zip poppler-utils fd-find zoxide imagemagick exiftool
 
 # Install Rust: https://www.rust-lang.org/tools/install
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source "$HOME/.cargo/env"
 # Upgrade Rust is you already installed long time ago
 rustup update stable
 
