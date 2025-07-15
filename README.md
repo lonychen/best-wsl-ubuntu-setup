@@ -177,7 +177,15 @@ rustup update stable
 
 # yazi: https://yazi-rs.github.io/
 cargo install --locked yazi-fm yazi-cli
+# Catppuccin Frappe Flavor for Yazi
+# https://github.com/yazi-rs/flavors/tree/main/catppuccin-frappe.yazi
 ya pkg add yazi-rs/flavors:catppuccin-frappe
+cat <<'EOF' | tee -a ~/.config/yazi/theme.toml > /dev/null
+[flavor]
+dark = "catppuccin-frappe"
+EOF
+
+# 建立 y 命令，方便在終端機中使用 yazi
 cat <<'EOF' | tee -a ~/.bashrc > /dev/null
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
