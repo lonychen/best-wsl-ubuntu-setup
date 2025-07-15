@@ -162,6 +162,9 @@ sudo ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
 這些工具可以幫助你更方便地使用 Linux 環境，特別是對於開發者來說，這些工具都是必不可少的。
 
 ```sh
+# 建立自用的執行檔目錄
+mkdir -p ~/.local/bin
+
 # Installing essential packages...
 sudo apt update && sudo apt install -y wslu xdg-utils \
   net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
@@ -197,8 +200,6 @@ curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
 # DotSlash: https://dotslash-cli.com/
 curl -LSfs "https://github.com/facebook/dotslash/releases/latest/download/dotslash-ubuntu-22.04.$(uname -m).tar.gz" | tar fxz - -C ~/.local/bin
 
-# 建立自用的執行檔目錄
-mkdir -p ~/.local/bin
 source ~/.profile
 ```
 
