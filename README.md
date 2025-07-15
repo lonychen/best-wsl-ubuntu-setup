@@ -384,16 +384,14 @@ cat ~/.vimrc | sudo tee /root/.vimrc
 
 gh help environment
 
+source ~/.bashrc
+```
+
+第一次使用需要手動登入 GitHub 才能擁有必要的權限：
+
+```sh
 gh auth login --web -h github.com
 gh auth status
-
-gh extension install github/gh-copilot
-gh extension upgrade github/gh-copilot
-
-gh copilot --help
-
-echo 'eval "$(gh copilot alias -- bash)"' >> ~/.bashrc
-source ~/.bashrc
 ```
 
 ```txt
@@ -403,14 +401,6 @@ github.com
   - Git operations protocol: https
   - Token: gho_************************************
   - Token scopes: 'gist', 'read:org', 'repo', 'workflow'
-```
-
-```sh
-# 透過自然語言生成 CLI 指令建議 (ghcs = GitHub Copilot Suggest)
-ghcs -h
-
-# 透過自然語言生成 CLI 指令解釋 (ghce = GitHub Copilot Explain)
-ghce -h
 ```
 
 ### 安裝 [AIChat](https://github.com/sigoden/aichat) 工具
