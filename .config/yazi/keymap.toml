@@ -1,0 +1,374 @@
+# 像 https://taplo.tamasfe.dev/ 這樣的 TOML 檢查器可以使用此 schema 來驗證你的設定檔
+# 如果遇到任何問題，請在 https://github.com/yazi-rs/schemas 建立 issue
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[mgr]
+
+keymap = [
+	# 模擬「檔案總管」的鍵盤操作
+	{ on = "<Enter>",   run = "enter",    desc = "Open selected files" },
+	{ on = "<Backspace>",  run = "leave", desc = "Back to the parent directory" },
+
+
+
+	{ on = "<Esc>", run = "escape",             desc = "退出視覺模式、清除選擇或取消搜尋" },
+	{ on = "<C-[>", run = "escape",             desc = "退出視覺模式、清除選擇或取消搜尋" },
+	{ on = "q",     run = "quit",               desc = "退出程式" },
+	{ on = "Q",     run = "quit --no-cwd-file", desc = "退出但不輸出 cwd 檔案" },
+	{ on = "<C-c>", run = "close",              desc = "關閉目前分頁，或在最後一個分頁時退出" },
+	{ on = "<C-z>", run = "suspend",            desc = "暫停程式" },
+
+	# 跳躍
+	{ on = "k", run = "arrow prev", desc = "上一個檔案" },
+	{ on = "j", run = "arrow next", desc = "下一個檔案" },
+
+	{ on = "<Up>",   run = "arrow prev", desc = "上一個檔案" },
+	{ on = "<Down>", run = "arrow next", desc = "下一個檔案" },
+
+	{ on = "<C-u>", run = "arrow -50%",  desc = "向上移動游標半頁" },
+	{ on = "<C-d>", run = "arrow 50%",   desc = "向下移動游標半頁" },
+	{ on = "<C-b>", run = "arrow -100%", desc = "向上移動游標一頁" },
+	{ on = "<C-f>", run = "arrow 100%",  desc = "向下移動游標一頁" },
+
+	{ on = "<S-PageUp>",   run = "arrow -50%",  desc = "向上移動游標半頁" },
+	{ on = "<S-PageDown>", run = "arrow 50%",   desc = "向下移動游標半頁" },
+	{ on = "<PageUp>",     run = "arrow -100%", desc = "向上移動游標一頁" },
+	{ on = "<PageDown>",   run = "arrow 100%",  desc = "向下移動游標一頁" },
+
+	{ on = [ "g", "g" ], run = "arrow top", desc = "移至頂部" },
+	{ on = "G",          run = "arrow bot", desc = "移至底部" },
+
+	# 導航
+	{ on = "h", run = "leave", desc = "返回上層目錄" },
+	{ on = "l", run = "enter", desc = "進入子目錄" },
+
+	{ on = "<Left>",  run = "leave", desc = "返回上層目錄" },
+	{ on = "<Right>", run = "enter", desc = "進入子目錄" },
+
+	{ on = "H", run = "back",    desc = "回到上一個目錄" },
+	{ on = "L", run = "forward", desc = "前進到下一個目錄" },
+
+	# 切換
+	{ on = "<Space>", run = [ "toggle", "arrow next" ], desc = "切換目前的選擇狀態" },
+	{ on = "<C-a>",   run = "toggle_all --state=on",    desc = "選擇所有檔案" },
+	{ on = "<C-r>",   run = "toggle_all",               desc = "反轉所有檔案的選擇狀態" },
+
+	# 視覺模式
+	{ on = "v", run = "visual_mode",         desc = "進入視覺模式 (選擇模式)" },
+	{ on = "V", run = "visual_mode --unset", desc = "進入視覺模式 (取消選擇模式)" },
+
+	# 搜尋
+	{ on = "K", run = "seek -5", desc = "在預覽中向上搜尋 5 個單位" },
+	{ on = "J", run = "seek 5",  desc = "在預覽中向下搜尋 5 個單位" },
+
+	# 定位
+	{ on = "<Tab>", run = "spot", desc = "定位游標所在檔案" },
+
+	# 操作
+	{ on = "o",         run = "wslview",                        desc = "開啟選中的檔案" },
+	{ on = "O",         run = "open --interactive",          desc = "互動式開啟選中的檔案" },
+	#{ on = "<Enter>",   run = "open",                        desc = "開啟選中的檔案" },
+	{ on = "<S-Enter>", run = "open --interactive",          desc = "互動式開啟選中的檔案" },
+	{ on = "y",         run = "yank",                        desc = "複製選中的檔案" },
+	{ on = "x",         run = "yank --cut",                  desc = "剪切選中的檔案" },
+	{ on = "p",         run = "paste",                       desc = "貼上已複製的檔案" },
+	{ on = "P",         run = "paste --force",               desc = "貼上已複製的檔案 (如果目標存在則覆蓋)" },
+	{ on = "-",         run = "link",                        desc = "建立已複製檔案的絕對路徑符號連結" },
+	{ on = "_",         run = "link --relative",             desc = "建立已複製檔案的相對路徑符號連結" },
+	{ on = "<C-->",     run = "hardlink",                    desc = "建立已複製檔案的硬連結" },
+	{ on = "Y",         run = "unyank",                      desc = "取消複製狀態" },
+	{ on = "X",         run = "unyank",                      desc = "取消複製狀態" },
+	{ on = "d",         run = "remove",                      desc = "將選中的檔案移至垃圾桶" },
+	{ on = "D",         run = "remove --permanently",        desc = "永久刪除選中的檔案" },
+	{ on = "a",         run = "create",                      desc = "建立檔案 (以 / 結尾表示目錄)" },
+	{ on = "r",         run = "rename --cursor=before_ext",  desc = "重新命名選中的檔案" },
+	{ on = ";",         run = "shell --interactive",         desc = "執行 shell 命令" },
+	{ on = ":",         run = "shell --block --interactive", desc = "執行 shell 命令 (阻塞直到完成)" },
+	{ on = ".",         run = "hidden toggle",               desc = "切換隱藏檔案的可見性" },
+	{ on = "s",         run = "search --via=fd",             desc = "透過 fd 按檔案名搜尋" },
+	{ on = "S",         run = "search --via=rg",             desc = "透過 ripgrep 按檔案內容搜尋" },
+	{ on = "<C-s>",     run = "escape --search",             desc = "取消正在進行的搜尋" },
+	{ on = "z",         run = "plugin fzf",                  desc = "透過 fzf 跳轉到檔案/目錄" },
+	{ on = "Z",         run = "plugin zoxide",               desc = "透過 zoxide 跳轉到目錄" },
+
+	# 行模式
+	{ on = [ "m", "s" ], run = "linemode size",        desc = "行模式：大小" },
+	{ on = [ "m", "p" ], run = "linemode permissions", desc = "行模式：權限" },
+	{ on = [ "m", "b" ], run = "linemode btime",       desc = "行模式：建立時間" },
+	{ on = [ "m", "m" ], run = "linemode mtime",       desc = "行模式：修改時間" },
+	{ on = [ "m", "o" ], run = "linemode owner",       desc = "行模式：擁有者" },
+	{ on = [ "m", "n" ], run = "linemode none",        desc = "行模式：無" },
+
+	# 複製
+	{ on = [ "c", "c" ], run = "copy path",             desc = "複製檔案路徑" },
+	{ on = [ "c", "d" ], run = "copy dirname",          desc = "複製目錄路徑" },
+	{ on = [ "c", "f" ], run = "copy filename",         desc = "複製檔案名稱" },
+	{ on = [ "c", "n" ], run = "copy name_without_ext", desc = "複製不含副檔名的檔案名稱" },
+
+	# 篩選
+	{ on = "f", run = "filter --smart", desc = "篩選檔案" },
+
+	# 尋找
+	{ on = "/", run = "find --smart",            desc = "尋找下一個檔案" },
+	{ on = "?", run = "find --previous --smart", desc = "尋找上一個檔案" },
+	{ on = "n", run = "find_arrow",              desc = "下一個找到的結果" },
+	{ on = "N", run = "find_arrow --previous",   desc = "上一個找到的結果" },
+
+	# 排序
+	{ on = [ ",", "m" ], run = [ "sort mtime --reverse=no", "linemode mtime" ], desc = "按修改時間排序" },
+	{ on = [ ",", "M" ], run = [ "sort mtime --reverse", "linemode mtime" ],    desc = "按修改時間排序 (反向)" },
+	{ on = [ ",", "b" ], run = [ "sort btime --reverse=no", "linemode btime" ], desc = "按建立時間排序" },
+	{ on = [ ",", "B" ], run = [ "sort btime --reverse", "linemode btime" ],    desc = "按建立時間排序 (反向)" },
+	{ on = [ ",", "e" ], run = "sort extension --reverse=no",                   desc = "按副檔名排序" },
+	{ on = [ ",", "E" ], run = "sort extension --reverse",                      desc = "按副檔名排序 (反向)" },
+	{ on = [ ",", "a" ], run = "sort alphabetical --reverse=no",                desc = "按字母順序排序" },
+	{ on = [ ",", "A" ], run = "sort alphabetical --reverse",                   desc = "按字母順序排序 (反向)" },
+	{ on = [ ",", "n" ], run = "sort natural --reverse=no",                     desc = "按自然順序排序" },
+	{ on = [ ",", "N" ], run = "sort natural --reverse",                        desc = "按自然順序排序 (反向)" },
+	{ on = [ ",", "s" ], run = [ "sort size --reverse=no", "linemode size" ],   desc = "按大小排序" },
+	{ on = [ ",", "S" ], run = [ "sort size --reverse", "linemode size" ],      desc = "按大小排序 (反向)" },
+	{ on = [ ",", "r" ], run = "sort random --reverse=no",                      desc = "隨機排序" },
+
+	# 跳轉
+	{ on = [ "g", "h" ],       run = "cd ~",             desc = "跳轉到主目錄" },
+	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "跳轉到 ~/.config" },
+	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "跳轉到 ~/Downloads" },
+	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "互動式跳轉" },
+	{ on = [ "g", "f" ],       run = "follow",           desc = "跟隨游標所在的符號連結" },
+
+	# 分頁
+	{ on = "t", run = "tab_create --current", desc = "使用目前工作目錄建立新分頁" },
+
+	{ on = "1", run = "tab_switch 0", desc = "切換到第一個分頁" },
+	{ on = "2", run = "tab_switch 1", desc = "切換到第二個分頁" },
+	{ on = "3", run = "tab_switch 2", desc = "切換到第三個分頁" },
+	{ on = "4", run = "tab_switch 3", desc = "切換到第四個分頁" },
+	{ on = "5", run = "tab_switch 4", desc = "切換到第五個分頁" },
+	{ on = "6", run = "tab_switch 5", desc = "切換到第六個分頁" },
+	{ on = "7", run = "tab_switch 6", desc = "切換到第七個分頁" },
+	{ on = "8", run = "tab_switch 7", desc = "切換到第八個分頁" },
+	{ on = "9", run = "tab_switch 8", desc = "切換到第九個分頁" },
+
+	{ on = "[", run = "tab_switch -1 --relative", desc = "切換到上一個分頁" },
+	{ on = "]", run = "tab_switch 1 --relative",  desc = "切換到下一個分頁" },
+
+	{ on = "{", run = "tab_swap -1", desc = "與上一個分頁交換位置" },
+	{ on = "}", run = "tab_swap 1",  desc = "與下一個分頁交換位置" },
+
+	# 任務
+	{ on = "w", run = "tasks:show", desc = "顯示任務管理器" },
+
+	# 說明
+	{ on = "~",    run = "help", desc = "開啟說明" },
+	{ on = "<F1>", run = "help", desc = "開啟說明" },
+]
+
+[tasks]
+
+keymap = [
+	{ on = "<Esc>", run = "close", desc = "關閉任務管理器" },
+	{ on = "<C-[>", run = "close", desc = "關閉任務管理器" },
+	{ on = "<C-c>", run = "close", desc = "關閉任務管理器" },
+	{ on = "w",     run = "close", desc = "關閉任務管理器" },
+
+	{ on = "k", run = "arrow prev", desc = "上一個任務" },
+	{ on = "j", run = "arrow next", desc = "下一個任務" },
+
+	{ on = "<Up>",   run = "arrow prev", desc = "上一個任務" },
+	{ on = "<Down>", run = "arrow next", desc = "下一個任務" },
+
+	{ on = "<Enter>", run = "inspect", desc = "檢視任務" },
+	{ on = "x",       run = "cancel",  desc = "取消任務" },
+
+	# 說明
+	{ on = "~",    run = "help", desc = "開啟說明" },
+	{ on = "<F1>", run = "help", desc = "開啟說明" },
+]
+
+[spot]
+
+keymap = [
+	{ on = "<Esc>", run = "close", desc = "關閉定位檢視" },
+	{ on = "<C-[>", run = "close", desc = "關閉定位檢視" },
+	{ on = "<C-c>", run = "close", desc = "關閉定位檢視" },
+	{ on = "<Tab>", run = "close", desc = "關閉定位檢視" },
+
+	{ on = "k", run = "arrow prev", desc = "上一行" },
+	{ on = "j", run = "arrow next", desc = "下一行" },
+	{ on = "h", run = "swipe prev", desc = "切換到上一個檔案" },
+	{ on = "l", run = "swipe next", desc = "切換到下一個檔案" },
+
+	{ on = "<Up>",    run = "arrow prev", desc = "上一行" },
+	{ on = "<Down>",  run = "arrow next", desc = "下一行" },
+	{ on = "<Left>",  run = "swipe prev", desc = "切換到上一個檔案" },
+	{ on = "<Right>", run = "swipe next", desc = "切換到下一個檔案" },
+
+	# 複製
+	{ on = [ "c", "c" ], run = "copy cell", desc = "複製選中的儲存格" },
+
+	# 說明
+	{ on = "~",    run = "help", desc = "開啟說明" },
+	{ on = "<F1>", run = "help", desc = "開啟說明" },
+]
+
+[pick]
+
+keymap = [
+	{ on = "<Esc>",   run = "close",          desc = "取消選擇" },
+	{ on = "<C-[>",   run = "close",          desc = "取消選擇" },
+	{ on = "<C-c>",   run = "close",          desc = "取消選擇" },
+	{ on = "<Enter>", run = "close --submit", desc = "確認選擇" },
+
+	{ on = "k", run = "arrow prev", desc = "上一個選項" },
+	{ on = "j", run = "arrow next", desc = "下一個選項" },
+
+	{ on = "<Up>",   run = "arrow prev", desc = "上一個選項" },
+	{ on = "<Down>", run = "arrow next", desc = "下一個選項" },
+
+	# 說明
+	{ on = "~",    run = "help", desc = "開啟說明" },
+	{ on = "<F1>", run = "help", desc = "開啟說明" },
+]
+
+[input]
+
+keymap = [
+	{ on = "<C-c>",   run = "close",          desc = "取消輸入" },
+	{ on = "<Enter>", run = "close --submit", desc = "確認輸入" },
+	{ on = "<Esc>",   run = "escape",         desc = "返回普通模式或取消輸入" },
+	{ on = "<C-[>",   run = "escape",         desc = "返回普通模式或取消輸入" },
+
+	# 模式
+	{ on = "i", run = "insert",                          desc = "進入插入模式" },
+	{ on = "I", run = [ "move first-char", "insert" ],   desc = "移至行首並進入插入模式" },
+	{ on = "a", run = "insert --append",                 desc = "進入附加模式" },
+	{ on = "A", run = [ "move eol", "insert --append" ], desc = "移至行尾並進入附加模式" },
+	{ on = "v", run = "visual",                          desc = "進入視覺模式" },
+	{ on = "r", run = "replace",                         desc = "取代單一字元" },
+
+	# 選擇
+	{ on = "V",     run = [ "move bol", "visual", "move eol" ], desc = "從行首選擇到行尾" },
+	{ on = "<C-A>", run = [ "move eol", "visual", "move bol" ], desc = "從行尾選擇到行首" },
+	{ on = "<C-E>", run = [ "move bol", "visual", "move eol" ], desc = "從行首選擇到行尾" },
+
+	# 字元移動
+	{ on = "h",       run = "move -1", desc = "向後移動一個字元" },
+	{ on = "l",       run = "move 1",  desc = "向前移動一個字元" },
+	{ on = "<Left>",  run = "move -1", desc = "向後移動一個字元" },
+	{ on = "<Right>", run = "move 1",  desc = "向前移動一個字元" },
+	{ on = "<C-b>",   run = "move -1", desc = "向後移動一個字元" },
+	{ on = "<C-f>",   run = "move 1",  desc = "向前移動一個字元" },
+
+	# 單字移動
+	{ on = "b",     run = "backward",                    desc = "向後移動到目前或上一個單字的開頭" },
+	{ on = "B",     run = "backward --far",              desc = "向後移動到目前或上一個 WORD 的開頭" },
+	{ on = "w",     run = "forward",                     desc = "向前移動到下一個單字的開頭" },
+	{ on = "W",     run = "forward --far",               desc = "向前移動到下一個 WORD 的開頭" },
+	{ on = "e",     run = "forward --end-of-word",       desc = "向前移動到目前或下一個單字的結尾" },
+	{ on = "E",     run = "forward --far --end-of-word", desc = "向前移動到目前或下一個 WORD 的結尾" },
+	{ on = "<A-b>", run = "backward",                    desc = "向後移動到目前或上一個單字的開頭" },
+	{ on = "<A-f>", run = "forward --end-of-word",       desc = "向前移動到目前或下一個單字的結尾" },
+
+	# 行移動
+	{ on = "0",      run = "move bol",        desc = "移動到行首" },
+	{ on = "$",      run = "move eol",        desc = "移動到行尾" },
+	{ on = "_",      run = "move first-char", desc = "移動到第一個非空白字元" },
+	{ on = "^",      run = "move first-char", desc = "移動到第一個非空白字元" },
+	{ on = "<C-a>",  run = "move bol",        desc = "移動到行首" },
+	{ on = "<C-e>",  run = "move eol",        desc = "移動到行尾" },
+	{ on = "<Home>", run = "move bol",        desc = "移動到行首" },
+	{ on = "<End>",  run = "move eol",        desc = "移動到行尾" },
+
+	# 刪除
+	{ on = "<Backspace>", run = "backspace",         desc = "刪除游標前的字元" },
+	{ on = "<Delete>",    run = "backspace --under", desc = "刪除游標下的字元" },
+	{ on = "<C-h>",       run = "backspace",         desc = "刪除游標前的字元" },
+	{ on = "<C-d>",       run = "backspace --under", desc = "刪除游標下的字元" },
+
+	# 刪除
+	{ on = "<C-u>", run = "kill bol",      desc = "向後刪除到行首" },
+	{ on = "<C-k>", run = "kill eol",      desc = "向前刪除到行尾" },
+	{ on = "<C-w>", run = "kill backward", desc = "向後刪除到目前單字的開頭" },
+	{ on = "<A-d>", run = "kill forward",  desc = "向前刪除到目前單字的結尾" },
+
+	# 剪切/複製/貼上
+	{ on = "d", run = "delete --cut",                                      desc = "剪切選中的字元" },
+	{ on = "D", run = [ "delete --cut", "move eol" ],                      desc = "剪切到行尾" },
+	{ on = "c", run = "delete --cut --insert",                             desc = "剪切選中的字元並進入插入模式" },
+	{ on = "C", run = [ "delete --cut --insert", "move eol" ],             desc = "剪切到行尾並進入插入模式" },
+	{ on = "s", run = [ "delete --cut --insert", "move 1" ],               desc = "剪切目前字元並進入插入模式" },
+	{ on = "S", run = [ "move bol", "delete --cut --insert", "move eol" ], desc = "剪切從行首到行尾並進入插入模式" },
+	{ on = "x", run = [ "delete --cut", "move 1 --in-operating" ],         desc = "剪切目前字元" },
+	{ on = "y", run = "yank",                                              desc = "複製選中的字元" },
+	{ on = "p", run = "paste",                                             desc = "在游標後貼上複製的字元" },
+	{ on = "P", run = "paste --before",                                    desc = "在游標前貼上複製的字元" },
+
+	# 復原/重做
+	{ on = "u",     run = "undo", desc = "復原上一個操作" },
+	{ on = "<C-r>", run = "redo", desc = "重做上一個操作" },
+
+	# 說明
+	{ on = "~",    run = "help", desc = "開啟說明" },
+	{ on = "<F1>", run = "help", desc = "開啟說明" },
+]
+
+[confirm]
+
+keymap = [
+	{ on = "<Esc>",   run = "close",          desc = "取消確認" },
+	{ on = "<C-[>",   run = "close",          desc = "取消確認" },
+	{ on = "<C-c>",   run = "close",          desc = "取消確認" },
+	{ on = "<Enter>", run = "close --submit", desc = "確認" },
+
+	{ on = "n", run = "close",          desc = "取消確認" },
+	{ on = "y", run = "close --submit", desc = "確認" },
+
+	{ on = "k", run = "arrow prev", desc = "上一行" },
+	{ on = "j", run = "arrow next", desc = "下一行" },
+
+	{ on = "<Up>",   run = "arrow prev", desc = "上一行" },
+	{ on = "<Down>", run = "arrow next", desc = "下一行" },
+
+	# 說明
+	{ on = "~",    run = "help", desc = "開啟說明" },
+	{ on = "<F1>", run = "help", desc = "開啟說明" },
+]
+
+[cmp]
+
+keymap = [
+	{ on = "<C-c>",   run = "close",                                      desc = "取消自動完成" },
+	{ on = "<Tab>",   run = "close --submit",                             desc = "確認自動完成" },
+	{ on = "<Enter>", run = [ "close --submit", "input:close --submit" ], desc = "完成並確認輸入" },
+
+	{ on = "<A-k>", run = "arrow prev", desc = "上一個項目" },
+	{ on = "<A-j>", run = "arrow next", desc = "下一個項目" },
+
+	{ on = "<Up>",   run = "arrow prev", desc = "上一個項目" },
+	{ on = "<Down>", run = "arrow next", desc = "下一個項目" },
+
+	{ on = "<C-p>", run = "arrow prev", desc = "上一個項目" },
+	{ on = "<C-n>", run = "arrow next", desc = "下一個項目" },
+
+	# 說明
+	{ on = "~",    run = "help", desc = "開啟說明" },
+	{ on = "<F1>", run = "help", desc = "開啟說明" },
+]
+
+[help]
+
+keymap = [
+	{ on = "<Esc>", run = "escape", desc = "清除篩選或隱藏說明" },
+	{ on = "<C-[>", run = "escape", desc = "清除篩選或隱藏說明" },
+	{ on = "<C-c>", run = "close",  desc = "隱藏說明" },
+
+	# 導航
+	{ on = "k", run = "arrow prev", desc = "上一行" },
+	{ on = "j", run = "arrow next", desc = "下一行" },
+
+	{ on = "<Up>",   run = "arrow prev", desc = "上一行" },
+	{ on = "<Down>", run = "arrow next", desc = "下一行" },
+
+	# 篩選
+	{ on = "f", run = "filter", desc = "篩選說明項目" },
+]
