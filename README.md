@@ -278,6 +278,9 @@ mkdir -p ~/.config && touch ~/.config/starship.toml
 # 安裝預設主題 https://starship.rs/presets/catppuccin-powerline
 starship preset catppuccin-powerline -o ~/.config/starship.toml
 
+# 修改 line_break 設定，啟用換行顯示
+sed -i '/^\[line_break\]/,/^\[/ s/disabled = true/disabled = false/' ~/.config/starship.toml
+
 cat <<'EOF' | tee -a ~/.bashrc > /dev/null
 eval "$(starship init bash)"
 EOF
