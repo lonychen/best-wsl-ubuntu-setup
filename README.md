@@ -289,8 +289,13 @@ source ~/.bashrc
 這是一個非常強大的命令列模糊搜尋工具，可以讓你在終端機中快速找到檔案或目錄。
 
 ```sh
+# Ubuntu 22.04 預設已經有安裝 fzf，但如果你想要重新安裝最新版本，可以先移除舊版：
+sudo apt remove fzf
+
+# 安裝最新版
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
+
 source ~/.bashrc
 ```
 
@@ -508,6 +513,20 @@ uv -V
 
 ```sh
 uv run main.py
+```
+
+### 安裝 Azure CLI
+
+```sh
+echo "Installing Azure CLI..."
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+az login
+```
+
+更新升級
+
+```sh
+az upgrade
 ```
 
 ### 安裝 Google Cloud SDK
