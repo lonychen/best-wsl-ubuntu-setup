@@ -35,7 +35,7 @@ mkdir -p ~/.local/bin
 
 # Installing essential packages...
 apt install -y tzdata lsb-release git wget curl vim man-db \
-  net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
+  build-essential net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
   ffmpeg 7zip poppler-utils fd-find zoxide imagemagick exiftool \
   aggregate dnsutils iproute2 iptables ipset
 
