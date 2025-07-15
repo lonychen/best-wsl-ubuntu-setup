@@ -129,6 +129,20 @@ wsl -u root
 passwd <username>
 ```
 
+### 設定無密碼變身 `root` 執行
+
+因為 WSL 主要是**個人使用**為主，所以我會建議設定無密碼變身 `root` 執行，這樣可以更方便地使用 `sudo` 命令。
+
+```sh
+echo "will ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/will
+```
+
+請記得將上述命令的 `will` 置換成你手冊登入 WSL 時註冊的帳號，如果你的帳號叫 `david` 的話，命令就是：
+
+```sh
+echo "david ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/david
+```
+
 ## 隨時更新 Ubuntu 到最新版本
 
 ```sh
@@ -140,20 +154,6 @@ sudo apt update && sudo apt upgrade -y
 ## 設定 WSL 開發環境
 
 部分設定參考自 [Set up a WSL development environment](https://learn.microsoft.com/en-us/windows/wsl/setup/environment?WT.mc_id=DT-MVP-4015686) 文件，但大多是我個人的經驗與習慣。
-
-### 設定無密碼變身 `root` 執行
-
-```sh
-# sudoers
-echo "will ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/will
-```
-
-請記得將上述命令的 `will` 置換成你手冊登入 WSL 時註冊的帳號，如果你的帳號叫 `david` 的話，命令就是：
-
-```sh
-# sudoers
-echo "david ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/david
-```
 
 ### 設定作業系統時區
 
