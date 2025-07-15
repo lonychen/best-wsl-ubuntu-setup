@@ -2,6 +2,12 @@
 
 ## 預計加入的工具清單
 
+### Playwright
+
+```sh
+sudo npx playwright install-deps
+```
+
 ### 安裝 [eza](https://github.com/eza-community/eza) & [eza-themes](https://github.com/eza-community/eza-themes) 工具
 
 一套 `ls` 的現代替代品。
