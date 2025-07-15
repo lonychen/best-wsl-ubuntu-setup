@@ -10,7 +10,11 @@ gh extension upgrade github/gh-copilot
 
 gh copilot --help
 
-echo 'eval "$(gh copilot alias -- bash)"' >> ~/.bashrc
+# 這段效能太差！
+# echo 'eval "$(gh copilot alias -- bash)"' >> ~/.bashrc
+
+# 可以這樣寫！
+gh copilot alias -- bash | tee -a ~/.bashrc > /dev/null
 
 # 透過自然語言生成 CLI 指令建議 (ghcs = GitHub Copilot Suggest)
 ghcs -h
