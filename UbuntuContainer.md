@@ -30,6 +30,9 @@ ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 這些工具可以幫助你更方便地使用 Linux 環境，特別是對於開發者來說，這些工具都是必不可少的。
 
 ```sh
+# 建立自用的執行檔目錄
+mkdir -p ~/.local/bin
+
 # Installing essential packages...
 apt install -y tzdata lsb-release git wget curl vim man-db \
   net-tools ripgrep jq lftp moreutils btop bat zip zstd gnupg2 \
@@ -73,15 +76,13 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 EOF
 
-# 建立自用的執行檔目錄
-mkdir -p ~/.local/bin
-source ~/.profile
-
 # yq: https://github.com/mikefarah/yq
 curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o ~/.local/bin/yq && chmod +x ~/.local/bin/yq
 
 # DotSlash: https://dotslash-cli.com/
 curl -LSfs "https://github.com/facebook/dotslash/releases/latest/download/dotslash-ubuntu-22.04.$(uname -m).tar.gz" | tar fxz - -C ~/.local/bin
+
+source ~/.profile
 ```
 
 ### 設定 Node.js 環境
