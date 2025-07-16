@@ -134,14 +134,9 @@ passwd <username>
 因為 WSL 主要是**個人使用**為主，所以我會建議設定無密碼變身 `root` 執行，這樣可以更方便地使用 `sudo` 命令。
 
 ```sh
-echo "will ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/will
+echo "tjchen ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/tjchen
 ```
 
-請記得將上述命令的 `will` 置換成你手冊登入 WSL 時註冊的帳號，如果你的帳號叫 `david` 的話，命令就是：
-
-```sh
-echo "david ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/david
-```
 
 ## 隨時更新 Ubuntu 到最新版本
 
