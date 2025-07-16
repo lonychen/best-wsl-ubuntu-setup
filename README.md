@@ -151,6 +151,11 @@ sudo apt update && sudo apt upgrade -y
 
 > 💡 建議不要執行 `sudo apt dist-upgrade -y`
 
+## WSL 一般操作
+
+ctrl + d：登出wsl。
+wsl + 指令：可以在windows下執行linux指令，例如 wsl find。
+
 ## 設定 WSL 開發環境
 
 部分設定參考自 [Set up a WSL development environment](https://learn.microsoft.com/en-us/windows/wsl/setup/environment?WT.mc_id=DT-MVP-4015686) 文件，但大多是我個人的經驗與習慣。
