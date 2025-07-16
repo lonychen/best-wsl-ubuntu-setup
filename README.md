@@ -150,6 +150,7 @@ sudo apt update && sudo apt upgrade -y
 
 ctrl + d：登出wsl。  
 wsl + 指令：可以在windows下執行linux指令，例如 wsl find。  
+\\wsl$：從windows檔案總管連到linux資料夾。  
 
 ## 設定 WSL 開發環境
 
