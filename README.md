@@ -279,8 +279,8 @@ chmod 600 ~/.ssh/authorized_keys
 # setup workspace
 mkdir -p ~/projects
 
-# setup VS Code
-code .
+# setup VS Code: WSL內會直接呼叫Windows上的VS Code
+code-insiders .
 ```
 
 ### 設定華麗的 Bash 提示符號
